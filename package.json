@@ -1,0 +1,11 @@
+{
+    "name": "js-syntax-demo",
+    "version": "1.0.0",
+    "scripts": {
+        "test": "npx eslint public/*.js && node --test test/check_html.js"
+    },
+    "devDependencies": {
+        "eslint": "^9.0.0",
+        "globals": "^15.0.0"
+    }
+}
