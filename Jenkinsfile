@@ -52,7 +52,7 @@ pipeline {
         }
     }
 
-    post {
+post {
         always {
             sh "docker-compose -f docker-compose.test.yml down --rmi local --volumes"
         }
@@ -61,6 +61,7 @@ pipeline {
             script {
                 try {
                     step([$class: 'GitHubCommitStatusSetter',
+                          // CHANGE THIS URL TO YOUR ACTUAL REPO
                           reposSource: [$class: 'ManuallyEnteredRepositorySource', url: 'https://github.com/obiwan1805/MMTNC_23127113_23127296'],
                           statusResultSource: [$class: 'ConditionalStatusResultSource', results: [
                               [$class: 'BetterThanOrEqualBuildResult', result: 'SUCCESS', state: 'SUCCESS', message: 'Jenkins Build Passed']
@@ -76,6 +77,7 @@ pipeline {
             script {
                 try {
                     step([$class: 'GitHubCommitStatusSetter',
+                          // CHANGE THIS URL TO YOUR ACTUAL REPO
                           reposSource: [$class: 'ManuallyEnteredRepositorySource', url: 'https://github.com/obiwan1805/MMTNC_23127113_23127296'],
                           statusResultSource: [$class: 'ConditionalStatusResultSource', results: [
                               [$class: 'AnyBuildResult', state: 'FAILURE', message: 'Jenkins Build Failed']
