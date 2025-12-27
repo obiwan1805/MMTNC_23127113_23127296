@@ -56,5 +56,35 @@ pipeline {
         always {
             sh "docker-compose -f docker-compose.test.yml down --rmi local --volumes"
         }
+        
+        success {
+            script {
+                try {
+                    step([$class: 'GitHubCommitStatusSetter',
+                          reposSource: [$class: 'ManuallyEnteredRepositorySource', url: 'https://github.com/obiwan1805/MMTNC_23127113_23127296'],
+                          statusResultSource: [$class: 'ConditionalStatusResultSource', results: [
+                              [$class: 'BetterThanOrEqualBuildResult', result: 'SUCCESS', state: 'SUCCESS', message: 'Jenkins Build Passed']
+                          ]]
+                    ])
+                } catch (Exception e) {
+                    echo "Warning: Could not send status to GitHub."
+                }
+            }
+        }
+
+        failure {
+            script {
+                try {
+                    step([$class: 'GitHubCommitStatusSetter',
+                          reposSource: [$class: 'ManuallyEnteredRepositorySource', url: 'https://github.com/obiwan1805/MMTNC_23127113_23127296'],
+                          statusResultSource: [$class: 'ConditionalStatusResultSource', results: [
+                              [$class: 'AnyBuildResult', state: 'FAILURE', message: 'Jenkins Build Failed']
+                          ]]
+                    ])
+                } catch (Exception e) {
+                    echo "Warning: Could not send status to GitHub."
+                }
+            }
+        }
     }
 }
