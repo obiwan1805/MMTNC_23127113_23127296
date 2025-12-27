@@ -61,13 +61,14 @@ post {
             script {
                 try {
                     step([$class: 'GitHubCommitStatusSetter',
-                          reposSource: [$class: 'ManuallyEnteredRepositorySource', url: 'https://github.com/nguyentranphuquy/mmtnc-23127113-23127296'],
+                          // CHANGE THIS URL TO YOUR ACTUAL REPO
+                          reposSource: [$class: 'ManuallyEnteredRepositorySource', url: 'https://github.com/obiwan1805/MMTNC_23127113_23127296'],
                           statusResultSource: [$class: 'ConditionalStatusResultSource', results: [
                               [$class: 'BetterThanOrEqualBuildResult', result: 'SUCCESS', state: 'SUCCESS', message: 'Jenkins Build Passed']
                           ]]
                     ])
                 } catch (Exception e) {
-                    echo "Warning: Could not send status to GitHub. Check credentials/plugins."
+                    echo "Warning: Could not send status to GitHub."
                 }
             }
         }
@@ -76,7 +77,8 @@ post {
             script {
                 try {
                     step([$class: 'GitHubCommitStatusSetter',
-                          reposSource: [$class: 'ManuallyEnteredRepositorySource', url: 'https://github.com/nguyentranphuquy/mmtnc-23127113-23127296'],
+                          // CHANGE THIS URL TO YOUR ACTUAL REPO
+                          reposSource: [$class: 'ManuallyEnteredRepositorySource', url: 'https://github.com/obiwan1805/MMTNC_23127113_23127296'],
                           statusResultSource: [$class: 'ConditionalStatusResultSource', results: [
                               [$class: 'AnyBuildResult', state: 'FAILURE', message: 'Jenkins Build Failed']
                           ]]
@@ -87,4 +89,3 @@ post {
             }
         }
     }
-}
