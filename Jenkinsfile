@@ -39,7 +39,7 @@ pipeline {
 
         stage('Deploy') {
             when {
-                branch 'main'
+                branch '*/main'
             }
             steps {
                 script {
@@ -64,7 +64,6 @@ post {
             script {
                 try {
                     step([$class: 'GitHubCommitStatusSetter',
-                          // CHANGE THIS URL TO YOUR ACTUAL REPO
                           reposSource: [$class: 'ManuallyEnteredRepositorySource', url: 'https://github.com/obiwan1805/MMTNC_23127113_23127296'],
                           statusResultSource: [$class: 'ConditionalStatusResultSource', results: [
                               [$class: 'BetterThanOrEqualBuildResult', result: 'SUCCESS', state: 'SUCCESS', message: 'Jenkins Build Passed']
@@ -80,7 +79,6 @@ post {
             script {
                 try {
                     step([$class: 'GitHubCommitStatusSetter',
-                          // CHANGE THIS URL TO YOUR ACTUAL REPO
                           reposSource: [$class: 'ManuallyEnteredRepositorySource', url: 'https://github.com/obiwan1805/MMTNC_23127113_23127296'],
                           statusResultSource: [$class: 'ConditionalStatusResultSource', results: [
                               [$class: 'AnyBuildResult', state: 'FAILURE', message: 'Jenkins Build Failed']
