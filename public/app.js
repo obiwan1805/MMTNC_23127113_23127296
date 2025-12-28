@@ -8,6 +8,7 @@ function increment() {
     displayElement.innerText = count;
     console.log("Counter updated to: " + count);
     console.logggggg("abc");
+    y   eherge wgergergre asfafwafwa 
 }
 
 window.increment = increment;
