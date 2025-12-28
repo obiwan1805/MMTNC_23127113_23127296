@@ -11,6 +11,7 @@ pipeline {
         stage('Run Integration Test') {
             steps {
                 script {
+                    echo "DEBUG: The current GIT_BRANCH is: ${env.GIT_BRANCH}"
                     echo "Starting Test Environment..."
                     sh "docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit --exit-code-from sut"
                 }
@@ -39,7 +40,9 @@ pipeline {
 
         stage('Deploy') {
             when {
-                branch '*/main'
+                expression {
+                    return env.GIT_BRANCH == 'origin/main'
+                }
             }
             steps {
                 script {
