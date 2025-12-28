@@ -38,6 +38,9 @@ pipeline {
         }
 
         stage('Deploy') {
+            when {
+                branch 'main'
+            }
             steps {
                 script {
                     echo "Deploying"
