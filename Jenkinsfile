@@ -52,7 +52,7 @@ pipeline {
                     sh "docker stop demo-site || true"
                     sh "docker rm demo-site || true"
 
-                    sh "docker run -d --restart unless-stopped -p 80:80 --name demo-site ${DOCKER_IMAGE}"
+                    sh "docker run -d --restart unless-stopped -p 3636:80 --name demo-site ${DOCKER_IMAGE}"
                 }
             }
         }
