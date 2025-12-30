@@ -1,7 +1,6 @@
 
 let count = 0;
 
-hehehhe this is a bad commit luuquangngu
 
 function increment() {
     count = count + 1;
