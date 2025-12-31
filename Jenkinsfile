@@ -28,6 +28,11 @@ pipeline {
         }
 
         stage('Push to Registry') {
+            when {
+                expression {
+                    return env.GIT_BRANCH == 'origin/main'
+                }
+            }
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: "${env.REGISTRY_CREDS}", passwordVariable: 'PASS', usernameVariable: 'USER')]) {
